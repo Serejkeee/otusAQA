@@ -1,5 +1,5 @@
 //        #6) В основной программе:
-//        Создайте ArrayList Animal
+//        Создайте ArrayList animal.Animal
 //        ##Создайте в консоли меню, при входе в приложение на экран выводится запрос команды add/list/exit
 //        Команды оформить в enum
 //При вводе команды она должна быть регистронезависимой и обрезать пробелы в начале и конце
@@ -15,6 +15,7 @@
 
 
 
+import animal.Animal;
 import commands.AnimalCommands;
 import commands.Commands;
 
