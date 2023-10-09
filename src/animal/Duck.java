@@ -1,4 +1,6 @@
-public class Duck extends Animal implements Flying{
+package animal;
+
+public class Duck extends Animal implements Flying {
     public Duck(String name, String age, String weight, String color) {
         super(name, age, weight, color);
     }

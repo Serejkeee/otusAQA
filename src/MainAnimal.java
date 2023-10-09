@@ -15,6 +15,9 @@
 
 
 
+import commands.AnimalCommands;
+import commands.Commands;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,50 +26,43 @@ public class MainAnimal {
     public static void main(String[] args) {
         List<Animal> list = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите запрос");
-        Commands commands = Commands.valueOf(scanner.nextLine());
-        if (Commands.ADD.equals(commands)) {
-            System.out.println("Какое животное?");
-            AnimalCommands animalCommands = AnimalCommands.valueOf(scanner.nextLine());
-            if (AnimalCommands.CAT.equals(animalCommands)) {
-                System.out.println("Спросить имя, возраст, вес, цвет");
-                String name = scanner.nextLine();
-                String age = scanner.nextLine();
-                String weight = scanner.nextLine();
-                String color = scanner.nextLine();
-                Cat cat = new Cat(name, age, weight, color);
-                list.add(cat);
-                cat.say();
-                System.out.println(list.toString());
-            }
-            if (AnimalCommands.DOG.equals(animalCommands)) {
-                System.out.println("Спросить имя, возраст, вес, цвет");
-                String name = scanner.nextLine();
-                String age = scanner.nextLine();
-                String weight = scanner.nextLine();
-                String color = scanner.nextLine();
-                Dog dog = new Dog(name, age, weight, color);
-                list.add(dog);
-                dog.say();
-                System.out.println(list.toString());
-            }
-            if (AnimalCommands.DUCK.equals(animalCommands)) {
-                System.out.println("Спросить имя, возраст, вес, цвет");
-                String name = scanner.nextLine();
-                String age = scanner.nextLine();
-                String weight = scanner.nextLine();
-                String color = scanner.nextLine();
-                Duck duck = new Duck(name, age, weight, color);
-                list.add(duck);
-                duck.say();
-                System.out.println(list.toString());
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.println("Введите запрос");
+            Commands commands = Commands.valueOf(scanner.nextLine());
+            if (Commands.ADD.equals(commands)) {
+                System.out.println("Какое животное?");
+                AnimalCommands animalCommands = AnimalCommands.valueOf(scanner.nextLine());
+                if (AnimalCommands.CAT.equals(animalCommands)) {
+                    createAnimal(list, scanner);
+                }
+                if (AnimalCommands.DOG.equals(animalCommands)) {
+                    createAnimal(list, scanner);
+                }
+                if (AnimalCommands.DUCK.equals(animalCommands)) {
+                    createAnimal(list, scanner);
+                }
             }
             if (Commands.LIST.equals(commands)) {
-                System.out.println(list.toString());
+                for (Animal animal : list) {
+                    System.out.println(animal.toString());
+                }
             }
             if (Commands.EXIT.equals(commands)) {
-                System.exit(200);
+                isRunning = false;
             }
         }
+    }
+
+    private static void createAnimal(List<Animal> list, Scanner scanner) {
+        System.out.println("Спросить имя, возраст, вес, цвет");
+        String name = scanner.nextLine();
+        String age = scanner.nextLine();
+        String weight = scanner.nextLine();
+        String color = scanner.nextLine();
+        Animal animal = new Animal(name, age, weight, color);
+        list.add(animal);
+        animal.say();
+        System.out.println(list.toString());
     }
 }

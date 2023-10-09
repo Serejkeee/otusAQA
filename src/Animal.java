@@ -16,20 +16,20 @@
 //        #2) Создайте интерфейс Flying
 //        ##Методы:
 //        Fly
-//        #3) Создайте класс Cat унаследуйте его от Animal
+//        #3) Создайте класс animal.Cat унаследуйте его от Animal
 //        Переопределить метод Say(Вывод на экран: "Мяу")
-//        #4) Создайте класс Dog унаследуйте его от Animal
+//        #4) Создайте класс animal.Dog унаследуйте его от Animal
 //        Переопределить метод Say(Вывод на экран: "Гав")
-//        #5) Создайте класс Duck унаследуйте его от Animal, реализуйте интерфейс Flying
+//        #5) Создайте класс animal.Duck унаследуйте его от Animal, реализуйте интерфейс Flying
 //        Переопределить метод Say(Вывод на экран: "Кря")
 //        Реализовать метод Fly(Вывод на экран: "Я лечу")
 
 
-public abstract class Animal {
-    String name;
-    String age;
-    String weight;
-    String color;
+public class Animal {
+    private String name;
+    private String age;
+    private String weight;
+    private String color;
 
     public Animal(String name, String age, String weight, String color) {
         this.name = name;
