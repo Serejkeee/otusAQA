@@ -25,45 +25,91 @@ import java.util.Scanner;
 
 public class MainAnimal {
     public static void main(String[] args) {
+
         List<Animal> list = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("Введите запрос");
-            Commands commands = Commands.valueOf(scanner.nextLine());
-            if (Commands.ADD.equals(commands)) {
+
+            if (Commands.ADD.equals(getCommands(scanner))) {
                 System.out.println("Какое животное?");
-                AnimalCommands animalCommands = AnimalCommands.valueOf(scanner.nextLine());
-                if (AnimalCommands.CAT.equals(animalCommands)) {
+
+                if (AnimalCommands.CAT.equals(getAnimalCommands(scanner))) {
                     createAnimal(list, scanner);
                 }
-                if (AnimalCommands.DOG.equals(animalCommands)) {
+                if (AnimalCommands.DOG.equals(getAnimalCommands(scanner))) {
                     createAnimal(list, scanner);
                 }
-                if (AnimalCommands.DUCK.equals(animalCommands)) {
+                if (AnimalCommands.DUCK.equals(getAnimalCommands(scanner))) {
                     createAnimal(list, scanner);
                 }
             }
-            if (Commands.LIST.equals(commands)) {
+            if (Commands.LIST.equals(getCommands(scanner))) {
                 for (Animal animal : list) {
                     System.out.println(animal.toString());
                 }
             }
-            if (Commands.EXIT.equals(commands)) {
+            if (Commands.EXIT.equals(getCommands(scanner))) {
                 isRunning = false;
             }
         }
     }
 
+    private static Commands getCommands(Scanner scanner) {
+        Commands commands = null;
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                commands = Commands.valueOf(scanner.nextLine().toUpperCase());
+                validInput = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Неверный Ввод. Пожалуйста, введите действительную команду.");
+            }
+        }
+        return commands;
+    }
+
+    private static AnimalCommands getAnimalCommands(Scanner scanner) {
+        AnimalCommands animalCommands = null;
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                animalCommands = AnimalCommands.valueOf(scanner.nextLine().toUpperCase());
+                validInput = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Неверный Ввод. Пожалуйста, введите действительную команду.");
+            }
+        }
+        return animalCommands;
+    }
+
     private static void createAnimal(List<Animal> list, Scanner scanner) {
         System.out.println("Спросить имя, возраст, вес, цвет");
         String name = scanner.nextLine();
-        String age = scanner.nextLine();
-        String weight = scanner.nextLine();
+        String age = getAgeAndWeight(scanner);
+        String weight = getAgeAndWeight(scanner);
         String color = scanner.nextLine();
         Animal animal = new Animal(name, age, weight, color);
         list.add(animal);
         animal.say();
         System.out.println(list.toString());
+    }
+
+    private static String getAgeAndWeight(Scanner scanner) {
+        String ageAndWeight = null;
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                ageAndWeight = scanner.nextLine();
+                if(Integer.parseInt(ageAndWeight) <= 0) {
+                    throw new IllegalArgumentException();
+                }
+                validInput = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Неверный Ввод. Пожалуйста, введите действительную команду.");
+            }
+        }
+        return ageAndWeight;
     }
 }
