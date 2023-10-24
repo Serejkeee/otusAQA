@@ -30,27 +30,23 @@ public class MainAnimal {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("Введите запрос");
+            System.out.println("Введите команду (например ADD, LIST, EXIT)");
 
-            if (Commands.ADD.equals(getCommands(scanner))) {
+            Commands command = getCommands(scanner);
+            if (Commands.ADD.equals(command)) {
                 System.out.println("Какое животное?");
-
-                if (AnimalCommands.CAT.equals(getAnimalCommands(scanner))) {
+                AnimalCommands animalCommand = getAnimalCommands(scanner);
+                if (AnimalCommands.CAT.equals(animalCommand) || AnimalCommands.DOG.equals(animalCommand) || AnimalCommands.DUCK.equals(animalCommand)) {
                     createAnimal(list, scanner);
                 }
-                if (AnimalCommands.DOG.equals(getAnimalCommands(scanner))) {
-                    createAnimal(list, scanner);
+            } else if (Commands.LIST.equals(command)) {
+                if (list.isEmpty()) {
+                    System.out.println("Животных в списке нет");
                 }
-                if (AnimalCommands.DUCK.equals(getAnimalCommands(scanner))) {
-                    createAnimal(list, scanner);
-                }
-            }
-            if (Commands.LIST.equals(getCommands(scanner))) {
                 for (Animal animal : list) {
                     System.out.println(animal.toString());
                 }
-            }
-            if (Commands.EXIT.equals(getCommands(scanner))) {
+            } else if (Commands.EXIT.equals(command)) {
                 isRunning = false;
             }
         }
