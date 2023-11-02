@@ -25,7 +25,7 @@ package animal;//#1) Создайте родительский класс
 //        Реализовать метод Fly(Вывод на экран: "Я лечу")
 
 
-public class Animal {
+public abstract class Animal {
     private String name;
     private String age;
     private String weight;

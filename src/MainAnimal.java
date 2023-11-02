@@ -16,6 +16,9 @@
 
 
 import animal.Animal;
+import animal.Cat;
+import animal.Dog;
+import animal.Duck;
 import commands.AnimalCommands;
 import commands.Commands;
 
@@ -36,8 +39,12 @@ public class MainAnimal {
             if (Commands.ADD.equals(command)) {
                 System.out.println("Какое животное?");
                 AnimalCommands animalCommand = getAnimalCommands(scanner);
-                if (AnimalCommands.CAT.equals(animalCommand) || AnimalCommands.DOG.equals(animalCommand) || AnimalCommands.DUCK.equals(animalCommand)) {
-                    createAnimal(list, scanner);
+                if (AnimalCommands.CAT.equals(animalCommand)) {
+                    createCatAnimal(list, scanner);
+                } else if (AnimalCommands.DOG.equals(animalCommand)) {
+                    createDogAnimal(list, scanner);
+                } else if (AnimalCommands.DUCK.equals(animalCommand)) {
+                    createDuckAnimal(list, scanner);
                 }
             } else if (Commands.LIST.equals(command)) {
                 if (list.isEmpty()) {
@@ -80,13 +87,37 @@ public class MainAnimal {
         return animalCommands;
     }
 
-    private static void createAnimal(List<Animal> list, Scanner scanner) {
+    private static void createCatAnimal(List<Animal> list, Scanner scanner) {
         System.out.println("Спросить имя, возраст, вес, цвет");
         String name = scanner.nextLine();
         String age = getAgeAndWeight(scanner);
         String weight = getAgeAndWeight(scanner);
         String color = scanner.nextLine();
-        Animal animal = new Animal(name, age, weight, color);
+        Animal animal = new Cat(name, age, weight, color);
+        list.add(animal);
+        animal.say();
+        System.out.println(list.toString());
+    }
+
+    private static void createDogAnimal(List<Animal> list, Scanner scanner) {
+        System.out.println("Спросить имя, возраст, вес, цвет");
+        String name = scanner.nextLine();
+        String age = getAgeAndWeight(scanner);
+        String weight = getAgeAndWeight(scanner);
+        String color = scanner.nextLine();
+        Animal animal = new Dog(name, age, weight, color);
+        list.add(animal);
+        animal.say();
+        System.out.println(list.toString());
+    }
+
+    private static void createDuckAnimal(List<Animal> list, Scanner scanner) {
+        System.out.println("Спросить имя, возраст, вес, цвет");
+        String name = scanner.nextLine();
+        String age = getAgeAndWeight(scanner);
+        String weight = getAgeAndWeight(scanner);
+        String color = scanner.nextLine();
+        Animal animal = new Duck(name, age, weight, color);
         list.add(animal);
         animal.say();
         System.out.println(list.toString());
